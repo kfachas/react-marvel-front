@@ -8,7 +8,7 @@ const Favorites = ({ userToken }) => {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3000/user/listFavorites",
+          "https://marvel-back-kfachas.herokuapp.com/user/listFavorites",
           { token: userToken },
           {
             headers: {

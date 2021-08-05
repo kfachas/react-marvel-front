@@ -10,7 +10,7 @@ const Comics = ({ value, userToken }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/comics?skip=${pagination.skip}&limit=${pagination.limit}&title=${value}`
+          `https://marvel-back-kfachas.herokuapp.com/comics?skip=${pagination.skip}&limit=${pagination.limit}&title=${value}`
         );
         setData(response.data.results);
         setIsLoading(false);

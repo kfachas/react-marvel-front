@@ -10,7 +10,7 @@ const Home = ({ value, userToken }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/characters?skip=${pagination.skip}&limit=${pagination.limit}&name=${value}`
+          `https://marvel-back-kfachas.herokuapp.com/characters?skip=${pagination.skip}&limit=${pagination.limit}&name=${value}`
         );
         setData(response.data.results);
         setIsLoading(false);
@@ -35,7 +35,7 @@ const Home = ({ value, userToken }) => {
                   onClick={async () => {
                     try {
                       const response = await axios.put(
-                        "http://localhost:3000/user/addFavorites",
+                        "https://marvel-back-kfachas.herokuapp.com/user/addFavorites",
                         {
                           id: elem._id,
                           token: userToken,
