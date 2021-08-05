@@ -35,7 +35,7 @@ const Comics = ({ value, userToken }) => {
                   onClick={async () => {
                     try {
                       const response = await axios.put(
-                        "http://localhost:3000/user/addFavorites",
+                        "https://marvel-back-kfachas.herokuapp.com/user/addFavorites",
                         {
                           id: elem._id,
                           token: userToken,
