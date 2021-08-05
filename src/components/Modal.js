@@ -4,6 +4,7 @@ const Modal = ({ modal, setModal, setUser }) => {
   const [values, setValues] = useState({});
   const [verify, setVerify] = useState(true);
   const [modalLogin, setModalLogin] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
@@ -31,8 +32,10 @@ const Modal = ({ modal, setModal, setUser }) => {
         password: values.password,
       });
       setUser(response.data.token);
+      setErrorMessage(false);
       setModal(false);
     } catch (error) {
+      setErrorMessage(true);
       console.log(error.response);
     }
   };
@@ -65,6 +68,17 @@ const Modal = ({ modal, setModal, setUser }) => {
             setValues(obj);
           }}
         />
+        {errorMessage === true && (
+          <span
+            style={{
+              color: "lightgrey",
+              fontSize: "14px",
+              marginBottom: "10px",
+            }}
+          >
+            Email/Password is not correct
+          </span>
+        )}
         <input type="submit" />
       </form>
     </div>

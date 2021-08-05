@@ -148,3 +148,25 @@ main {
   color: white;
   cursor: pointer;
 }
+
+.fav {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  overflow-x: scroll;
+  margin-top: 15px;
+  margin-bottom: 50px;
+}
+.fav li:not(:last-child) {
+  margin-right: 15px;
+}
+
+footer {
+  margin-top: 25px;
+  background-color: black;
+  color: white;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

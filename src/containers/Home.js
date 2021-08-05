@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const Home = ({ favory, setFavory, value }) => {
+const Home = ({ value, userToken }) => {
   const [pagination, setPagination] = useState({ skip: 0, limit: 10 });
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -32,14 +32,25 @@ const Home = ({ favory, setFavory, value }) => {
               <div>
                 {elem.name}{" "}
                 <button
-                  onClick={() => {
-                    const newFavory = [...favory];
-                    console.log(favory.indexOf(elem));
-                    if (favory.indexOf(elem) === -1) {
-                      newFavory.push(elem);
-                      setFavory(newFavory);
-                    } else {
-                      alert("Vous l'avez déjà rajouté en favori !");
+                  onClick={async () => {
+                    try {
+                      const response = await axios.put(
+                        "http://localhost:3000/user/addFavorites",
+                        {
+                          id: elem._id,
+                          token: userToken,
+                          thumbnail: elem.thumbnail,
+                          name: elem.name,
+                        },
+                        {
+                          headers: {
+                            authorization: `Bearer ${userToken}`,
+                          },
+                        }
+                      );
+                      console.log(response);
+                    } catch (error) {
+                      console.log(error.message);
                     }
                   }}
                 >

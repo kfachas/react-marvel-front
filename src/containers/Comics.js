@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const Comics = ({ favory, setFavory, value }) => {
+const Comics = ({ value, userToken }) => {
   const [pagination, setPagination] = useState({ skip: 0, limit: 10 });
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -25,20 +25,32 @@ const Comics = ({ favory, setFavory, value }) => {
   ) : (
     <main>
       <ul className="characters">
-        {data.map((elem, index) => {
+        {data.map((elem) => {
           return (
             <li key={elem._id}>
               <div>
                 {" "}
                 {elem.title}{" "}
                 <button
-                  onClick={() => {
-                    const newFavory = [...favory];
-                    if (favory.indexOf(elem) === -1) {
-                      newFavory.push(elem);
-                      setFavory(newFavory);
-                    } else {
-                      alert("Vous l'avez déjà rajouté en favori !");
+                  onClick={async () => {
+                    try {
+                      const response = await axios.put(
+                        "http://localhost:3000/user/addFavorites",
+                        {
+                          id: elem._id,
+                          token: userToken,
+                          thumbnail: elem.thumbnail,
+                          title: elem.title,
+                        },
+                        {
+                          headers: {
+                            authorization: `Bearer ${userToken}`,
+                          },
+                        }
+                      );
+                      console.log(response);
+                    } catch (error) {
+                      console.log(error.message);
                     }
                   }}
                 >
