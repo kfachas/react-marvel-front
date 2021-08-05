@@ -10,11 +10,14 @@ const Modal = ({ modal, setModal, setUser }) => {
       event.preventDefault();
       if (values.passwordConfirm === values.password) {
         setVerify(true);
-        const response = await axios.post("http://localhost:3000/user/signup", {
-          username: values.username,
-          email: values.email,
-          password: values.password,
-        });
+        const response = await axios.post(
+          "https://marvel-back-kfachas.herokuapp.com/user/signup",
+          {
+            username: values.username,
+            email: values.email,
+            password: values.password,
+          }
+        );
         console.log(response);
       } else {
         setVerify(false);
@@ -27,10 +30,13 @@ const Modal = ({ modal, setModal, setUser }) => {
   const handleSubmit2 = async (event) => {
     try {
       event.preventDefault();
-      const response = await axios.post("http://localhost:3000/user/login", {
-        email: values.email,
-        password: values.password,
-      });
+      const response = await axios.post(
+        "https://marvel-back-kfachas.herokuapp.com/user/login",
+        {
+          email: values.email,
+          password: values.password,
+        }
+      );
       setUser(response.data.token);
       setErrorMessage(false);
       setModal(false);
