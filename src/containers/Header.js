@@ -1,7 +1,14 @@
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import logo from "../assets/Marvel_Logo.svg.png";
-const Header = ({ setValue, modal, setModal, userToken, setUserToken }) => {
+const Header = ({
+  setValue,
+  modal,
+  setModal,
+  userToken,
+  setUserToken,
+  setClickLogin,
+}) => {
   const history = useHistory();
   const handleChange = (event) => {
     const value = event.target.value;
@@ -20,20 +27,38 @@ const Header = ({ setValue, modal, setModal, userToken, setUserToken }) => {
         <button onClick={() => history.push("/comics")}>Comics</button>
         <button onClick={() => history.push("/favorites")}>Favorites</button>
       </div>
-      {userToken === null ? (
-        <button onClick={() => setModal(!modal)}>
-          S'inscrire/Se connecter
-        </button>
-      ) : (
-        <button
-          onClick={() => {
-            Cookies.remove("userToken");
-            setUserToken(null);
-          }}
-        >
-          Se déconnecter
-        </button>
-      )}
+      <div>
+        {userToken === null ? (
+          <button>
+            <span
+              onClick={() => {
+                setClickLogin(false);
+                setModal(true);
+              }}
+            >
+              Register now
+            </span>
+            /
+            <span
+              onClick={() => {
+                setClickLogin(true);
+                setModal(!modal);
+              }}
+            >
+              Login
+            </span>
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              Cookies.remove("userToken");
+              setUserToken(null);
+            }}
+          >
+            Sign out
+          </button>
+        )}
+      </div>
     </header>
   );
 };

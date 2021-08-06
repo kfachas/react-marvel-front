@@ -1,13 +1,38 @@
 import axios from "axios";
 import { useState } from "react";
-const Modal = ({ modal, setModal, setUser }) => {
+import { useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
+const Modal = ({ modal, setModal, setUser, clickLogin }) => {
+  const history = useHistory();
   const [values, setValues] = useState({});
   const [verify, setVerify] = useState(true);
-  const [modalLogin, setModalLogin] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
-  const handleSubmit = async (event) => {
+  const regexSpecialChar = /[^A-Za-z0-9_|\s]/g;
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const handleKeyDown = (e) => {
+    if (e.key === " ") {
+      e.preventDefault();
+    }
+  };
+  const handleSubmitSignup = async (event) => {
     try {
       event.preventDefault();
+      const searchSpecialChar = values.password.match(regexSpecialChar);
+      const testEmail = values.email.match(regexEmail);
+      if (!testEmail) {
+        return alert("Not a correct email");
+      }
+      if (!searchSpecialChar) {
+        return alert("Need one special character");
+      }
+      if (
+        values.password.charAt(0) !== values.password.charAt(0).toUpperCase()
+      ) {
+        return alert(
+          "The first character of your password must be a capital letter"
+        );
+      }
       if (values.passwordConfirm === values.password) {
         setVerify(true);
         const response = await axios.post(
@@ -19,6 +44,9 @@ const Modal = ({ modal, setModal, setUser }) => {
           }
         );
         console.log(response);
+        alert(
+          "Votre inscription à été validée ! Vous pouvez dès maintenant vous connectez"
+        );
       } else {
         setVerify(false);
       }
@@ -27,7 +55,7 @@ const Modal = ({ modal, setModal, setUser }) => {
     }
   };
 
-  const handleSubmit2 = async (event) => {
+  const handleSubmitLogin = async (event) => {
     try {
       event.preventDefault();
       const response = await axios.post(
@@ -40,39 +68,48 @@ const Modal = ({ modal, setModal, setUser }) => {
       setUser(response.data.token);
       setErrorMessage(false);
       setModal(false);
+      history.push("/favorites");
     } catch (error) {
       setErrorMessage(true);
       console.log(error.response);
     }
   };
 
-  return modalLogin ? (
+  return clickLogin ? (
     <div className={modal === false ? "hiddenModal" : "displayModal"}>
-      <button
-        onClick={() => {
-          setModal(false);
-        }}
-      >
-        Fermer la fenêtre
-      </button>
-      <form onSubmit={handleSubmit2}>
+      <div>
+        <FontAwesomeIcon
+          className="cross"
+          onClick={() => {
+            setModal(false);
+          }}
+          color="white"
+          icon={faTimesCircle}
+        />
+      </div>
+      <form onSubmit={handleSubmitLogin}>
         <input
-          type="text"
+          type="email"
           placeholder="email"
           onChange={(event) => {
             const obj = { ...values };
             obj.email = event.target.value;
             setValues(obj);
           }}
+          required
         />
         <input
           type="password"
+          name="password"
+          minlength="6"
           placeholder="password"
+          onKeyDown={handleKeyDown}
           onChange={(event) => {
             const obj = { ...values };
             obj.password = event.target.value;
             setValues(obj);
           }}
+          required
         />
         {errorMessage === true && (
           <span
@@ -90,38 +127,34 @@ const Modal = ({ modal, setModal, setUser }) => {
     </div>
   ) : (
     <div className={modal === false ? "hiddenModal" : "displayModal"}>
-      <button
-        onClick={() => {
-          setModal(false);
-        }}
-      >
-        Fermer la fenêtre
-      </button>
-      <form onSubmit={handleSubmit}>
+      <div>
+        <FontAwesomeIcon
+          className="cross"
+          onClick={() => {
+            setModal(false);
+          }}
+          color="white"
+          icon={faTimesCircle}
+        />
+      </div>
+      <form onSubmit={handleSubmitSignup}>
         <h3>INSCRIPTION</h3>
-        <span>
-          Vous avez déjà un compte ? Veuillez cliquer{" "}
-          <span
-            style={{ color: "red" }}
-            onClick={() => {
-              setModalLogin(true);
-            }}
-          >
-            ici
-          </span>
-        </span>
+
         <input
           type="text"
+          name="name"
           placeholder="Username"
+          minlength="5"
           onChange={(event) => {
             const obj = { ...values };
             const value = event.target.value;
             obj.username = value;
             setValues(obj);
           }}
+          required
         />
         <input
-          type="text"
+          type="email"
           placeholder="Email"
           onChange={(event) => {
             const obj = { ...values };
@@ -129,10 +162,14 @@ const Modal = ({ modal, setModal, setUser }) => {
             obj.email = value;
             setValues(obj);
           }}
+          required
         />
         <input
           type="password"
+          name="password"
           placeholder="Password"
+          minlength="6"
+          onKeyDown={handleKeyDown}
           style={{ border: verify === false ? "1px solid red" : "" }}
           onChange={(event) => {
             const obj = { ...values };
@@ -140,17 +177,28 @@ const Modal = ({ modal, setModal, setUser }) => {
             obj.password = value;
             setValues(obj);
           }}
+          required
         />
         <input
           type="password"
+          name="password"
           placeholder="Confirm password"
+          minlength="6"
+          onKeyDown={handleKeyDown}
           style={{ border: verify === false ? "1px solid red" : "" }}
           onChange={(event) => {
             const obj = { ...values };
+            if (event.currentTarget.value.includes(" ")) {
+              event.currentTarget.value = event.currentTarget.value.replace(
+                /\s/g,
+                ""
+              );
+            }
             const value = event.target.value;
             obj.passwordConfirm = value;
             setValues(obj);
           }}
+          required
         />
 
         <input type="submit" />

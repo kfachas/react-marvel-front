@@ -4,10 +4,40 @@
 
 * {
   font-family: "Marvel";
+  font-weight: bold;
+}
+
+a {
+  font-weight: bold;
+  cursor: pointer;
+  color: red;
+  transition: 0.2s;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+a:visited {
+  color: inherit;
+}
+
+a:link {
+  text-decoration: none;
 }
 
 body {
   background-color: #1a1b1d;
+}
+
+h3 {
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  border-bottom: 1px solid white;
+  padding: 10px;
+  margin-bottom: 25px;
+  text-shadow: 2px 2px 20px #ffffff;
 }
 
 header {
@@ -16,6 +46,7 @@ header {
   margin-bottom: 50px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 header img {
@@ -37,16 +68,62 @@ header input {
   border-radius: 5px;
 }
 
+header .container button {
+  margin: 0 20px;
+  border: none;
+  border: 1px solid red;
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+  width: 150px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+}
+header .container button:hover {
+  opacity: 0.6;
+}
+
+header button:last-child {
+  margin: 0 20px;
+  border: none;
+  border: 1px solid red;
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+  width: 150px;
+  font-weight: bold;
+}
+header span {
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+header span:hover {
+  text-decoration: underline;
+}
+
 main {
   max-width: 1144px;
   margin: 0 auto;
   color: white;
 }
 
-.characters img {
+.imgCha {
   height: 250px;
-  width: 250px;
+  border-bottom-left-radius: 25%;
+  border-bottom-right-radius: 25%;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.imgCha:hover {
+  opacity: 0.6;
+}
+
 .characters {
   display: flex;
   justify-content: center;
@@ -56,16 +133,21 @@ main {
   display: flex;
   flex-direction: column;
   width: 200px;
-  height: 322px;
+  height: 290px;
   overflow: hidden;
   overflow-y: scroll;
-  margin-bottom: 15px;
-  background-color: white;
+  margin-bottom: 50px;
   color: black;
+  border: 1px solid white;
+  border-bottom-left-radius: 25%;
+  border-bottom-right-radius: 25%;
 }
 
 .characters li:not(:nth-child(5n)) {
   margin-right: 30px;
+}
+.characters li:hover {
+  text-decoration: underline;
 }
 
 .comicsItem img {
@@ -108,14 +190,15 @@ main {
   width: 100%;
   position: fixed;
   top: 0px;
-  z-index: 2;
+  z-index: 3;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
 .displayModal form {
-  background-color: black;
+  background-color: white;
+  border: 1px solid red;
   border-radius: 50%;
   color: white;
   height: 400px;
@@ -129,6 +212,7 @@ main {
 .displayModal input {
   outline: none;
   border: none;
+  border: 1px solid black;
   padding: 5px;
   margin-bottom: 10px;
 }
@@ -138,17 +222,17 @@ main {
   font-weight: 700;
   font-size: 20px;
 }
-.displayModal button {
-  border: none;
-  background-color: black;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  padding: 5px;
-  font-size: 20px;
-  color: white;
+
+.cross {
+  font-size: 24px;
+  transition: 0.5s;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
+.cross:hover {
+  transform: rotate(90deg);
+}
 .fav {
   display: flex;
   flex-wrap: nowrap;
@@ -161,6 +245,13 @@ main {
   margin-right: 15px;
 }
 
+.fav img {
+  height: 250px;
+  width: 250px;
+  object-position: center;
+  object-fit: center;
+}
+
 footer {
   margin-top: 25px;
   background-color: black;
@@ -169,4 +260,40 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.fa-heart {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.fa-heart:hover {
+  color: red;
+  opacity: 0.7;
+}
+
+.imgCha {
+  background-color: rgb(0, 0, 0, 0.8);
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgCha:hover {
+  opacity: 1;
+}
+.test {
+  opacity: 0;
+  width: 200px;
+  height: 250px;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.test:hover {
+  color: white;
+  background-color: rgb(0, 0, 0, 0.8);
+  opacity: 1;
 }

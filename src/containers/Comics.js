@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import ComicsItem from "../components/ComicsItems";
 
+import { useState, useEffect } from "react";
+
+import axios from "axios";
 const Comics = ({ value, userToken }) => {
   const [pagination, setPagination] = useState({ skip: 0, limit: 10 });
   const [data, setData] = useState();
+  const [userData, setUserData] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -13,59 +16,34 @@ const Comics = ({ value, userToken }) => {
           `https://marvel-back-kfachas.herokuapp.com/comics?skip=${pagination.skip}&limit=${pagination.limit}&title=${value}`
         );
         setData(response.data.results);
+
+        if (userToken) {
+          const response2 = await axios.post(
+            "https://marvel-back-kfachas.herokuapp.com/user/listFavorites",
+            { token: userToken },
+            {
+              headers: {
+                authorization: `Bearer ${userToken}`,
+              },
+            }
+          );
+          setUserData(response2.data);
+        }
+
         setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, [pagination.skip, pagination.limit, value]);
+  }, [pagination.skip, pagination.limit, value, userToken]);
   return isLoading ? (
     <span>En cours de chargement..</span>
   ) : (
     <main>
+      <h3>List of MARVEL's comics</h3>
       <ul className="characters">
-        {data.map((elem) => {
-          return (
-            <li key={elem._id}>
-              <div>
-                {" "}
-                {elem.title}{" "}
-                <button
-                  onClick={async () => {
-                    try {
-                      const response = await axios.put(
-                        "https://marvel-back-kfachas.herokuapp.com/user/addFavorites",
-                        {
-                          id: elem._id,
-                          token: userToken,
-                          thumbnail: elem.thumbnail,
-                          title: elem.title,
-                        },
-                        {
-                          headers: {
-                            authorization: `Bearer ${userToken}`,
-                          },
-                        }
-                      );
-                      console.log(response);
-                    } catch (error) {
-                      console.log(error.message);
-                    }
-                  }}
-                >
-                  add to favorite
-                </button>
-              </div>
-
-              <img
-                src={`${elem.thumbnail.path}.${elem.thumbnail.extension}`}
-                alt={elem.title}
-              />
-              {elem.description}
-            </li>
-          );
-        })}
+        <ComicsItem data={data} userToken={userToken} userData={userData} />
       </ul>
       {pagination.skip >= 10 && (
         <button
@@ -75,7 +53,7 @@ const Comics = ({ value, userToken }) => {
             setPagination(obj);
           }}
         >
-          Page précédente
+          Previous page
         </button>
       )}
       <button
@@ -85,7 +63,7 @@ const Comics = ({ value, userToken }) => {
           setPagination(obj);
         }}
       >
-        Page suivante
+        Next page
       </button>
     </main>
   );
