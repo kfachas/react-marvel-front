@@ -24,15 +24,42 @@ const Header = ({
             Characters
           </button>
           <button onClick={() => history.push("/comics")}>Comics</button>
-          <button
-            style={{
-              borderBottomLeftRadius: "10px",
-              borderBottomRightRadius: "10px",
-            }}
-            onClick={() => history.push("/favorites")}
-          >
-            Favorites
-          </button>
+          <button onClick={() => history.push("/favorites")}>Favorites</button>
+          {userToken === null ? (
+            <button
+              style={{
+                borderBottomRightRadius: "10px",
+                borderBottomLeftRadius: "10px",
+              }}
+            >
+              <span
+                onClick={() => {
+                  setClickLogin(false);
+                  setModal(true);
+                }}
+              >
+                Register now
+              </span>
+              /
+              <span
+                onClick={() => {
+                  setClickLogin(true);
+                  setModal(!modal);
+                }}
+              >
+                Login
+              </span>
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                Cookies.remove("userToken");
+                setUserToken(null);
+              }}
+            >
+              Sign out
+            </button>
+          )}
         </div>
       </div>
       <div className="container">
