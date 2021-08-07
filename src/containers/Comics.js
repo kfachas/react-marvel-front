@@ -3,17 +3,24 @@ import ComicsItem from "../components/ComicsItems";
 import { useState, useEffect } from "react";
 
 import axios from "axios";
-const Comics = ({ value, userToken }) => {
-  const [pagination, setPagination] = useState({ skip: 0, limit: 10 });
+const Comics = ({ value, userToken, paginationC, setPaginationC }) => {
   const [data, setData] = useState();
   const [userData, setUserData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [count, setCount] = useState();
+
+  useEffect(() => {
+    const formData2 = window.localStorage.getItem("comics");
+    setPaginationC(JSON.parse(formData2));
+  }, [setPaginationC]);
+  useEffect(() => {
+    window.localStorage.setItem("comics", JSON.stringify(paginationC));
+  });
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://marvel-back-kfachas.herokuapp.com/comics?skip=${pagination.skip}&limit=${pagination.limit}&title=${value}`
+          `https://marvel-back-kfachas.herokuapp.com/comics?skip=${paginationC.skip}&limit=${paginationC.limit}&title=${value}`
         );
         setData(response.data.results);
         setCount(response.data.count);
@@ -37,7 +44,8 @@ const Comics = ({ value, userToken }) => {
       }
     };
     fetchData();
-  }, [pagination.skip, pagination.limit, value, userToken]);
+  }, [paginationC.skip, paginationC.limit, value, userToken]);
+
   return isLoading ? (
     <div class="wrapper">
       <div class="circle"></div>
@@ -55,23 +63,23 @@ const Comics = ({ value, userToken }) => {
         <ComicsItem data={data} userToken={userToken} userData={userData} />
       </ul>
       <div className="paginationBtn">
-        {pagination.skip >= 10 && (
+        {paginationC.skip >= 10 && (
           <button
             onClick={() => {
-              const obj = { ...pagination };
+              const obj = { ...paginationC };
               obj.skip -= 10;
-              setPagination(obj);
+              setPaginationC(obj);
             }}
           >
             Previous page
           </button>
         )}
-        {pagination.skip < count && (
+        {paginationC.skip < count && (
           <button
             onClick={() => {
-              const obj = { ...pagination };
+              const obj = { ...paginationC };
               obj.skip += 10;
-              setPagination(obj);
+              setPaginationC(obj);
             }}
           >
             Next page

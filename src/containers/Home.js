@@ -2,12 +2,18 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import CharactersItem from "../components/CharactersItem";
 
-const Home = ({ value, userToken }) => {
-  const [pagination, setPagination] = useState({ skip: 0, limit: 10 });
+const Home = ({ value, userToken, pagination, setPagination }) => {
   const [count, setCount] = useState();
   const [data, setData] = useState();
   const [userData, setUserData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const formData = window.localStorage.getItem("characters");
+    setPagination(JSON.parse(formData));
+  }, [setPagination]);
+  useEffect(() => {
+    window.localStorage.setItem("characters", JSON.stringify(pagination));
+  });
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,7 +41,7 @@ const Home = ({ value, userToken }) => {
       }
     };
     fetchData();
-  }, [pagination.skip, pagination.limit, value, userToken, count]);
+  }, [pagination.skip, pagination.limit, value, userToken]);
 
   return isLoading ? (
     <div class="wrapper">

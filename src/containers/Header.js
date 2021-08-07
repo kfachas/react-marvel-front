@@ -1,6 +1,7 @@
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import logo from "../assets/Marvel_Logo.svg.png";
+
 const Header = ({
   setValue,
   modal,
@@ -20,7 +21,11 @@ const Header = ({
       <div class="dropdown">
         <button class="boutonmenuprincipal">Menu</button>
         <div class="dropdown-child">
-          <button onClick={() => history.push("/characters")}>
+          <button
+            onClick={() => {
+              history.push("/characters");
+            }}
+          >
             Characters
           </button>
           <button onClick={() => history.push("/comics")}>Comics</button>
@@ -71,7 +76,11 @@ const Header = ({
           />
         </div>
         <div>
-          <button onClick={() => history.push("/characters")}>
+          <button
+            onClick={() => {
+              history.push("/characters");
+            }}
+          >
             Characters
           </button>
           <button onClick={() => history.push("/comics")}>Comics</button>

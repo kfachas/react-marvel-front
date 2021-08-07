@@ -16,11 +16,12 @@ function App() {
   const [modal, setModal] = useState(false);
   const [clickLogin, setClickLogin] = useState(false);
   const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
+  const [paginationC, setPaginationC] = useState({ skip: 0, limit: 10 });
+  const [pagination, setPagination] = useState({ skip: 0, limit: 10 });
   const setUser = (token) => {
     Cookies.set("userToken", token);
     setUserToken(token);
   };
-
   return (
     <Router>
       <Header
@@ -40,7 +41,12 @@ function App() {
       />
       <Switch>
         <Route exact path="/comics">
-          <Comics value={value} userToken={userToken} />
+          <Comics
+            value={value}
+            userToken={userToken}
+            paginationC={paginationC}
+            setPaginationC={setPaginationC}
+          />
         </Route>
         <Route path="/favorites">
           <Favorites userToken={userToken} />
@@ -49,7 +55,12 @@ function App() {
           <ComicsByCharacters />
         </Route>
         <Route path="/">
-          <Home value={value} userToken={userToken} />
+          <Home
+            value={value}
+            userToken={userToken}
+            pagination={pagination}
+            setPagination={setPagination}
+          />
         </Route>
       </Switch>
       <Footer />
