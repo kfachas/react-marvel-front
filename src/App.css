@@ -134,8 +134,6 @@ main {
   flex-direction: column;
   width: 200px;
   height: 290px;
-  overflow: hidden;
-  overflow-y: scroll;
   margin-bottom: 50px;
   color: black;
   border: 1px solid white;
