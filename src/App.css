@@ -295,6 +295,8 @@ footer {
   align-items: center;
   justify-content: center;
   text-align: center;
+  border-bottom-left-radius: 25%;
+  border-bottom-right-radius: 25%;
 }
 .test:hover {
   color: white;
@@ -341,6 +343,11 @@ footer {
     margin-bottom: 15px;
     transition: 0.3s;
   }
+
+  .characters li {
+    margin-left: 30px;
+  }
+
   .boutonmenuprincipal {
     background-color: red;
     color: white;

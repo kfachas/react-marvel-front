@@ -18,7 +18,7 @@ const Header = ({
     <header>
       <img src={logo} alt="MARVEL" />
       <div class="dropdown">
-        <button class="boutonmenuprincipal">MENU PRINCIPAL</button>
+        <button class="boutonmenuprincipal">Main Menu</button>
         <div class="dropdown-child">
           <button onClick={() => history.push("/characters")}>
             Characters
