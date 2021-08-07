@@ -52,6 +52,7 @@ const Modal = ({ modal, setModal, setUser, clickLogin }) => {
         setVerify(false);
       }
     } catch (error) {
+      alert("This email already has an account");
       console.log(error.response);
     }
   };
