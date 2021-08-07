@@ -13,7 +13,7 @@ const FavComics = ({ comicsFav, userToken }) => {
               <FontAwesomeIcon
                 icon={heartSolid}
                 color="red"
-                className="heartSol"
+                style={{ marginBottom: "5px" }}
                 onClick={async () => {
                   try {
                     const response = await axios.put(

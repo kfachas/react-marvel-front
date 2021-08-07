@@ -9,12 +9,11 @@ const FavCharacters = ({ charactersFav, userToken }) => {
       {charactersFav.map((elem) => {
         return (
           <li key={elem.id}>
-            <div>
-              {elem.name}
+            <div className="favItems">
               <FontAwesomeIcon
                 icon={heartSolid}
                 color="red"
-                className="heartSol"
+                style={{ marginBottom: "5px" }}
                 onClick={async () => {
                   try {
                     const response = await axios.put(
@@ -36,6 +35,7 @@ const FavCharacters = ({ charactersFav, userToken }) => {
                   }
                 }}
               />
+              {elem.name}
             </div>{" "}
             <Link to={`/comics/${elem._id}`}>
               <img

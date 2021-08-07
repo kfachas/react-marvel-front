@@ -19,15 +19,14 @@ const ComicsItem = ({ data, userToken, userData }) => {
         return (
           <li key={elem._id}>
             <div
+              className="titleChar"
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
                 padding: "5px",
                 backgroundColor: "white",
-                borderBottom: "1px solid black",
-                borderLeft: "1px solid black",
-                borderRight: "1px solid black",
+                border: "1px solid black",
                 height: "30px",
               }}
             >

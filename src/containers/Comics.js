@@ -8,7 +8,7 @@ const Comics = ({ value, userToken }) => {
   const [data, setData] = useState();
   const [userData, setUserData] = useState();
   const [isLoading, setIsLoading] = useState(true);
-
+  const [count, setCount] = useState();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -16,6 +16,7 @@ const Comics = ({ value, userToken }) => {
           `https://marvel-back-kfachas.herokuapp.com/comics?skip=${pagination.skip}&limit=${pagination.limit}&title=${value}`
         );
         setData(response.data.results);
+        setCount(response.data.count);
 
         if (userToken) {
           const response2 = await axios.post(
@@ -38,33 +39,45 @@ const Comics = ({ value, userToken }) => {
     fetchData();
   }, [pagination.skip, pagination.limit, value, userToken]);
   return isLoading ? (
-    <span>En cours de chargement..</span>
+    <div class="wrapper">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="shadow"></div>
+      <div class="shadow"></div>
+      <div class="shadow"></div>
+      <span>Loading</span>
+    </div>
   ) : (
     <main>
       <h3>List of MARVEL's comics</h3>
       <ul className="characters">
         <ComicsItem data={data} userToken={userToken} userData={userData} />
       </ul>
-      {pagination.skip >= 10 && (
-        <button
-          onClick={() => {
-            const obj = { ...pagination };
-            obj.skip -= 10;
-            setPagination(obj);
-          }}
-        >
-          Previous page
-        </button>
-      )}
-      <button
-        onClick={() => {
-          const obj = { ...pagination };
-          obj.skip += 10;
-          setPagination(obj);
-        }}
-      >
-        Next page
-      </button>
+      <div className="paginationBtn">
+        {pagination.skip >= 10 && (
+          <button
+            onClick={() => {
+              const obj = { ...pagination };
+              obj.skip -= 10;
+              setPagination(obj);
+            }}
+          >
+            Previous page
+          </button>
+        )}
+        {pagination.skip < count && (
+          <button
+            onClick={() => {
+              const obj = { ...pagination };
+              obj.skip += 10;
+              setPagination(obj);
+            }}
+          >
+            Next page
+          </button>
+        )}
+      </div>
     </main>
   );
 };

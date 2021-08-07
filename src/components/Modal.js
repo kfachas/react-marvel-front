@@ -47,6 +47,7 @@ const Modal = ({ modal, setModal, setUser, clickLogin }) => {
         alert(
           "Votre inscription à été validée ! Vous pouvez dès maintenant vous connectez"
         );
+        history.push("/favorites");
       } else {
         setVerify(false);
       }

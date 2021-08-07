@@ -18,13 +18,21 @@ const Header = ({
     <header>
       <img src={logo} alt="MARVEL" />
       <div class="dropdown">
-        <button class="boutonmenuprincipal">Main Menu</button>
+        <button class="boutonmenuprincipal">Menu</button>
         <div class="dropdown-child">
           <button onClick={() => history.push("/characters")}>
             Characters
           </button>
           <button onClick={() => history.push("/comics")}>Comics</button>
-          <button onClick={() => history.push("/favorites")}>Favorites</button>
+          <button
+            style={{
+              borderBottomLeftRadius: "10px",
+              borderBottomRightRadius: "10px",
+            }}
+            onClick={() => history.push("/favorites")}
+          >
+            Favorites
+          </button>
         </div>
       </div>
       <div className="container">

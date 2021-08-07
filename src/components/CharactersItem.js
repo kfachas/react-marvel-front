@@ -26,6 +26,7 @@ const CharactersItem = ({ data, userData, userToken }) => {
         return (
           <li key={elem._id}>
             <div
+              className="titleChar"
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -36,7 +37,7 @@ const CharactersItem = ({ data, userData, userToken }) => {
                 height: "30px",
               }}
             >
-              {elem.name}
+              <p>{elem.name}</p>
               {flag === 0 ? (
                 <FontAwesomeIcon
                   icon={heartRegular}
