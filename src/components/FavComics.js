@@ -8,8 +8,7 @@ const FavComics = ({ comicsFav, userToken }) => {
       {comicsFav.map((elem) => {
         return (
           <li key={elem.id}>
-            <div>
-              {elem.title}
+            <div className="favItems">
               <FontAwesomeIcon
                 icon={heartSolid}
                 color="red"
@@ -35,6 +34,7 @@ const FavComics = ({ comicsFav, userToken }) => {
                   }
                 }}
               />
+              {elem.title}
             </div>
             <img
               src={`${elem.thumbnail.path}.${elem.thumbnail.extension}`}
