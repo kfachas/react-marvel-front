@@ -17,17 +17,33 @@ const Header = ({
   return (
     <header>
       <img src={logo} alt="MARVEL" />
-      <div className="container">
-        <input
-          type="text"
-          onChange={handleChange}
-          placeholder="Recherche par titre.."
-        />
-        <button onClick={() => history.push("/characters")}>Characters</button>
-        <button onClick={() => history.push("/comics")}>Comics</button>
-        <button onClick={() => history.push("/favorites")}>Favorites</button>
+      <div class="dropdown">
+        <button class="boutonmenuprincipal">MENU PRINCIPAL</button>
+        <div class="dropdown-child">
+          <button onClick={() => history.push("/characters")}>
+            Characters
+          </button>
+          <button onClick={() => history.push("/comics")}>Comics</button>
+          <button onClick={() => history.push("/favorites")}>Favorites</button>
+        </div>
       </div>
-      <div>
+      <div className="container">
+        <div>
+          <input
+            type="text"
+            onChange={handleChange}
+            placeholder="Recherche par titre.."
+          />
+        </div>
+        <div>
+          <button onClick={() => history.push("/characters")}>
+            Characters
+          </button>
+          <button onClick={() => history.push("/comics")}>Comics</button>
+          <button onClick={() => history.push("/favorites")}>Favorites</button>
+        </div>
+      </div>
+      <div className="lastBtn">
         {userToken === null ? (
           <button>
             <span

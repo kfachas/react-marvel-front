@@ -84,7 +84,7 @@ header .container button:hover {
   opacity: 0.6;
 }
 
-header button:last-child {
+header .lastBtn button {
   margin: 0 20px;
   border: none;
   border: 1px solid red;
@@ -93,6 +93,12 @@ header button:last-child {
   padding: 5px;
   width: 150px;
   font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+header .lastBtn button:hover {
+  opacity: 0.7;
 }
 header span {
   cursor: pointer;
@@ -294,4 +300,84 @@ footer {
   color: white;
   background-color: rgb(0, 0, 0, 0.8);
   opacity: 1;
+}
+
+.dropdown {
+  display: none;
+}
+
+@media (max-width: 1144px) {
+  header {
+    flex-direction: column;
+    height: 175px;
+    padding-bottom: 30px;
+  }
+  header div:first-child {
+    margin: 15px 0;
+  }
+  header .container {
+    margin-bottom: 15px;
+    flex-direction: column;
+    margin-left: 0px;
+  }
+  main {
+    max-width: 900px;
+  }
+  .characters li {
+    margin-right: 30px;
+  }
+}
+
+@media (max-width: 585px) {
+  header {
+    padding-top: 15px;
+    height: 250px;
+  }
+  header .container {
+    display: none;
+  }
+  header .dropdown {
+    display: block;
+    margin-bottom: 15px;
+    transition: 0.3s;
+  }
+  .boutonmenuprincipal {
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 0px;
+    margin-top: 20px;
+    font-size: 25px;
+    width: 160px;
+  }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    transition: 0.3s;
+  }
+  .dropdown-child {
+    display: none;
+    width: 150px;
+    transition: 0.3s;
+  }
+  .dropdown-child button {
+    background-color: white;
+    color: black;
+    width: 150px;
+    height: 30px;
+    display: block;
+    border: none;
+    border-bottom: 1px solid red;
+    cursor: pointer;
+  }
+
+  .dropdown-child button:hover {
+    opacity: 0.7;
+  }
+
+  .dropdown:hover .dropdown-child {
+    display: block;
+    margin: 0 auto;
+  }
 }
