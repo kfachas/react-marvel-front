@@ -41,7 +41,7 @@ function App() {
         clickLogin={clickLogin}
       />
       <Switch>
-        <Route path="/comics">
+        <Route exact path="/comics">
           <Comics
             value={value}
             userToken={userToken}
