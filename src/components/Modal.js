@@ -70,8 +70,8 @@ const Modal = ({ modal, setModal, setUser, clickLogin }) => {
       setUser(response.data.token);
       setErrorMessage(false);
       setModal(false);
-      history.push("/favorites");
       window.location.reload();
+      history.push("/favorites");
     } catch (error) {
       setErrorMessage(true);
       console.log(error.response);
