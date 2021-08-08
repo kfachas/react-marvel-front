@@ -67,8 +67,8 @@ const Modal = ({ modal, setModal, setUser, clickLogin }) => {
       );
       setUser(response.data.token);
       setErrorMessage(false);
-      history.push("/favorites");
       setModal(false);
+      history.push("/favorites");
     } catch (error) {
       setErrorMessage(true);
       console.log(error.response);

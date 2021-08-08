@@ -22,6 +22,7 @@ function App() {
     Cookies.set("userToken", token);
     setUserToken(token);
   };
+
   return (
     <Router>
       <Header
@@ -40,7 +41,7 @@ function App() {
         clickLogin={clickLogin}
       />
       <Switch>
-        <Route exact path="/comics">
+        <Route path="/comics">
           <Comics
             value={value}
             userToken={userToken}
@@ -54,7 +55,7 @@ function App() {
         <Route exact path="/comics/:id">
           <ComicsByCharacters />
         </Route>
-        <Route path="/">
+        <Route path={`/`}>
           <Home
             value={value}
             userToken={userToken}

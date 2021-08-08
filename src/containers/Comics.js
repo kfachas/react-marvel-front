@@ -3,12 +3,20 @@ import Loader from "../components/Loader";
 import { useState, useEffect } from "react";
 
 import axios from "axios";
+
 const Comics = ({ value, userToken, paginationC, setPaginationC }) => {
   const [data, setData] = useState();
   const [userData, setUserData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [count, setCount] = useState();
 
+  useEffect(() => {
+    const formData2 = window.localStorage.getItem("comics");
+    setPaginationC(JSON.parse(formData2));
+  }, [setPaginationC]);
+  useEffect(() => {
+    window.localStorage.setItem("comics", JSON.stringify(paginationC));
+  }, [paginationC]);
   useEffect(() => {
     const fetchData = async () => {
       try {

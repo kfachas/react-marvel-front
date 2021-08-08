@@ -10,11 +10,20 @@ const Home = ({ value, userToken, pagination, setPagination }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const formData2 = window.localStorage.getItem("characters");
+    setPagination(JSON.parse(formData2));
+  }, [setPagination]);
+  useEffect(() => {
+    window.localStorage.setItem("characters", JSON.stringify(pagination));
+  });
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
           `https://marvel-back-kfachas.herokuapp.com/characters?skip=${pagination.skip}&limit=${pagination.limit}&name=${value}`
         );
+
         setData(response.data.results);
         setCount(response.data.count);
         if (userToken) {

@@ -8,7 +8,7 @@ const ComicsItem = ({ data, userToken, userData }) => {
     <>
       {data.map((elem) => {
         let flag = 0;
-        if (userToken) {
+        if (userToken && userData.comicsFav.length > 0) {
           for (let i = 0; i < userData.comicsFav.length; i++) {
             if (elem._id === userData.comicsFav[i]._id) {
               console.log(userData.comicsFav[i].title);
