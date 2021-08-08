@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import Cookies from "js-cookie";
 import FavCharacters from "../components/FavCharacters";
 import FavComics from "../components/FavComics";
 import Loader from "../components/Loader";
@@ -34,6 +34,15 @@ const Favorites = ({ userToken }) => {
       <Loader />
     ) : (
       <main className="favorites">
+        {Cookies.get("username") && (
+          <span>
+            Here are your favorites{" "}
+            <span style={{ color: "red" }}>
+              {Cookies.get("username").toUpperCase()}
+            </span>{" "}
+            !
+          </span>
+        )}
         {data.charactersFav.length === 0 ? (
           <h3>
             You have not yet set any favorites in this category! ("Characters

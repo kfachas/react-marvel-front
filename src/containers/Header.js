@@ -59,6 +59,7 @@ const Header = ({
             <button
               onClick={() => {
                 Cookies.remove("userToken");
+                Cookies.remove("username");
                 setUserToken(null);
               }}
             >
@@ -112,6 +113,7 @@ const Header = ({
           <button
             onClick={() => {
               Cookies.remove("userToken");
+              Cookies.remove("username");
               setUserToken(null);
             }}
           >

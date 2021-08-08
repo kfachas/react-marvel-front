@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import CharactersItem from "../components/CharactersItem";
 import Loader from "../components/Loader";
 
+import Cookies from "js-cookie";
+
 const Home = ({ value, userToken, pagination, setPagination }) => {
   const [count, setCount] = useState();
   const [data, setData] = useState();
@@ -42,6 +44,15 @@ const Home = ({ value, userToken, pagination, setPagination }) => {
     <Loader />
   ) : (
     <main>
+      {Cookies.get("username") && (
+        <span>
+          Helloo{" "}
+          <span style={{ color: "red" }}>
+            {Cookies.get("username").toUpperCase()}
+          </span>
+          , here is the list of all MARVEL's characters!
+        </span>
+      )}
       <h3>List of MARVEL's characters</h3>
       <ul className="characters">
         <CharactersItem

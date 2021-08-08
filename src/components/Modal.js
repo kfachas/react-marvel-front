@@ -67,7 +67,7 @@ const Modal = ({ modal, setModal, setUser, clickLogin }) => {
           password: values.password,
         }
       );
-      setUser(response.data.token);
+      setUser(response.data.token, response.data.account.username);
       setErrorMessage(false);
       setModal(false);
       window.location.reload();

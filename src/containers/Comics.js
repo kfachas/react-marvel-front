@@ -3,7 +3,7 @@ import Loader from "../components/Loader";
 import { useState, useEffect } from "react";
 
 import axios from "axios";
-
+import Cookies from "js-cookie";
 const Comics = ({ value, userToken, paginationC, setPaginationC }) => {
   const [data, setData] = useState();
   const [userData, setUserData] = useState();
@@ -44,6 +44,15 @@ const Comics = ({ value, userToken, paginationC, setPaginationC }) => {
     <Loader />
   ) : (
     <main>
+      {Cookies.get("username") && (
+        <span>
+          Helloo{" "}
+          <span style={{ color: "red" }}>
+            {Cookies.get("username").toUpperCase()}
+          </span>
+          , here is the list of all MARVEL's comics !
+        </span>
+      )}
       <h3>List of MARVEL's comics</h3>
       <ul className="characters">
         <ComicsItem
