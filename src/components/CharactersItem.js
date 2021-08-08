@@ -5,7 +5,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as heartRegular } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as heartSolid } from "@fortawesome/free-solid-svg-icons";
 
-const CharactersItem = ({ data, userData, userToken }) => {
+const CharactersItem = ({ data, userData, userToken, setUserData }) => {
+  const updateData = async () => {
+    if (userToken) {
+      const response2 = await axios.post(
+        "https://marvel-back-kfachas.herokuapp.com/user/listFavorites",
+        { token: userToken },
+        {
+          headers: {
+            authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+      setUserData(response2.data);
+    }
+  };
+
   return (
     <>
       {data.map((elem) => {
@@ -49,15 +64,15 @@ const CharactersItem = ({ data, userData, userToken }) => {
                           },
                         }
                       );
-                      window.location.reload();
+                      updateData();
                       console.log(response);
                     } catch (error) {
                       if (!userToken) {
                         alert(
-                          "Connectez vous pour pouvoir ajouter des favoris"
+                          "You need to be connected if u want to add in favorite that item !"
                         );
                       } else {
-                        alert("Vous l'avez déjà rajouter en favori !");
+                        alert("That item is already in ur favorites !");
                       }
                       console.log(error.message);
                     }
@@ -81,7 +96,7 @@ const CharactersItem = ({ data, userData, userToken }) => {
                           },
                         }
                       );
-                      window.location.reload();
+                      updateData();
                       console.log(response);
                     } catch (error) {
                       console.log(error.response);

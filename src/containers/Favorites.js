@@ -63,9 +63,9 @@ const Favorites = ({ userToken }) => {
     );
   } else {
     return (
-      <span style={{ color: "white" }}>
+      <h3 style={{ color: "white" }}>
         You must be logged in to have access to favorites
-      </span>
+      </h3>
     );
   }
 };

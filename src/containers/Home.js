@@ -10,14 +10,6 @@ const Home = ({ value, userToken, pagination, setPagination }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const formData2 = window.localStorage.getItem("characters");
-    setPagination(JSON.parse(formData2));
-  }, [setPagination]);
-  useEffect(() => {
-    window.localStorage.setItem("characters", JSON.stringify(pagination));
-  });
-
-  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
@@ -52,7 +44,12 @@ const Home = ({ value, userToken, pagination, setPagination }) => {
     <main>
       <h3>List of MARVEL's characters</h3>
       <ul className="characters">
-        <CharactersItem data={data} userData={userData} userToken={userToken} />
+        <CharactersItem
+          data={data}
+          userData={userData}
+          userToken={userToken}
+          setUserData={setUserData}
+        />
       </ul>
       <div className="paginationBtn">
         {pagination.skip >= 10 && (
