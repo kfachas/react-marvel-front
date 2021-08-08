@@ -105,7 +105,14 @@ const CharactersItem = ({ data, userData, userToken, setUserData }) => {
                 />
               )}
             </div>
-            <Link to={`/comics/${elem._id}`}>
+            <Link
+              to={{
+                pathname: `/comics/${elem._id}`,
+                state: {
+                  userToken: userToken,
+                },
+              }}
+            >
               <div
                 className="imgCha"
                 style={{

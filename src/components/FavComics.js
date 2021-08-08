@@ -7,7 +7,7 @@ const FavComics = ({ comicsFav, userToken }) => {
     <>
       {comicsFav.map((elem) => {
         return (
-          <li key={elem.id}>
+          <li key={elem._id}>
             <div className="favItems">
               <FontAwesomeIcon
                 icon={heartSolid}
