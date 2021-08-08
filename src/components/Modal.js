@@ -46,6 +46,7 @@ const Modal = ({ modal, setModal, setUser, clickLogin }) => {
         console.log(response);
         alert("Registration completed! You can now log in!");
         history.push("/favorites");
+        window.location.reload();
       } else {
         setVerify(false);
       }
@@ -69,6 +70,7 @@ const Modal = ({ modal, setModal, setUser, clickLogin }) => {
       setErrorMessage(false);
       setModal(false);
       history.push("/favorites");
+      window.location.reload();
     } catch (error) {
       setErrorMessage(true);
       console.log(error.response);
