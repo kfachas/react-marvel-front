@@ -45,6 +45,7 @@ const Modal = ({ modal, setModal, setUser, clickLogin }) => {
         );
         console.log(response);
         alert("Registration completed! You can now log in!");
+        setModal(false);
         history.push("/favorites");
         window.location.reload();
       } else {
