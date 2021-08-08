@@ -16,8 +16,8 @@ function App() {
   const [modal, setModal] = useState(false);
   const [clickLogin, setClickLogin] = useState(false);
   const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
-  const [paginationC, setPaginationC] = useState({ skip: 0, limit: 10 });
-  const [pagination, setPagination] = useState({ skip: 0, limit: 10 });
+  const [paginationC, setPaginationC] = useState({ skip: 0, limit: 50 });
+  const [pagination, setPagination] = useState({ skip: 0, limit: 50 });
   const setUser = (token) => {
     Cookies.set("userToken", token);
     setUserToken(token);

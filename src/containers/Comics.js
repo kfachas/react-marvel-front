@@ -54,11 +54,11 @@ const Comics = ({ value, userToken, paginationC, setPaginationC }) => {
         />
       </ul>
       <div className="paginationBtn">
-        {paginationC.skip >= 10 && (
+        {paginationC.skip >= 50 && (
           <button
             onClick={() => {
               const obj = { ...paginationC };
-              obj.skip -= 10;
+              obj.skip -= 50;
               setPaginationC(obj);
             }}
           >
@@ -69,7 +69,7 @@ const Comics = ({ value, userToken, paginationC, setPaginationC }) => {
           <button
             onClick={() => {
               const obj = { ...paginationC };
-              obj.skip += 10;
+              obj.skip += 50;
               setPaginationC(obj);
             }}
           >

@@ -52,11 +52,11 @@ const Home = ({ value, userToken, pagination, setPagination }) => {
         />
       </ul>
       <div className="paginationBtn">
-        {pagination.skip >= 10 && (
+        {pagination.skip >= 50 && (
           <button
             onClick={() => {
               const obj = { ...pagination };
-              obj.skip -= 10;
+              obj.skip -= 50;
               setPagination(obj);
             }}
           >
@@ -67,7 +67,7 @@ const Home = ({ value, userToken, pagination, setPagination }) => {
           <button
             onClick={() => {
               const obj = { ...pagination };
-              obj.skip += 10;
+              obj.skip += 50;
               setPagination(obj);
             }}
           >
