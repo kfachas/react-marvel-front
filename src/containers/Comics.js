@@ -1,5 +1,5 @@
 import ComicsItem from "../components/ComicsItems";
-
+import Loader from "../components/Loader";
 import { useState, useEffect } from "react";
 
 import axios from "axios";
@@ -9,13 +9,6 @@ const Comics = ({ value, userToken, paginationC, setPaginationC }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [count, setCount] = useState();
 
-  useEffect(() => {
-    const formData2 = window.localStorage.getItem("comics");
-    setPaginationC(JSON.parse(formData2));
-  }, [setPaginationC]);
-  useEffect(() => {
-    window.localStorage.setItem("comics", JSON.stringify(paginationC));
-  });
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -47,15 +40,7 @@ const Comics = ({ value, userToken, paginationC, setPaginationC }) => {
   }, [paginationC.skip, paginationC.limit, value, userToken]);
 
   return isLoading ? (
-    <div class="wrapper">
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="shadow"></div>
-      <div class="shadow"></div>
-      <div class="shadow"></div>
-      <span>Loading</span>
-    </div>
+    <Loader />
   ) : (
     <main>
       <h3>List of MARVEL's comics</h3>

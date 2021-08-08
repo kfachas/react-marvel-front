@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import FavCharacters from "../components/FavCharacters";
 import FavComics from "../components/FavComics";
-
+import Loader from "../components/Loader";
 const Favorites = ({ userToken }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -31,15 +31,7 @@ const Favorites = ({ userToken }) => {
   }, [userToken]);
   if (userToken) {
     return isLoading ? (
-      <div class="wrapper">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="shadow"></div>
-        <div class="shadow"></div>
-        <div class="shadow"></div>
-        <span>Loading</span>
-      </div>
+      <Loader />
     ) : (
       <main className="favorites">
         {data.charactersFav.length === 0 ? (

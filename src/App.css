@@ -395,6 +395,10 @@ footer {
     display: none;
   }
 
+  .comicsItem ul li {
+    align-items: center;
+  }
+
   .titleChar {
     height: 100px !important;
   }

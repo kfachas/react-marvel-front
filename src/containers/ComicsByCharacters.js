@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+
+import Loader from "../components/Loader";
 const ComicsByCharacters = () => {
   const { id } = useParams();
   const [data, setData] = useState();
@@ -21,7 +23,7 @@ const ComicsByCharacters = () => {
     fetchData();
   }, [id]);
   return isLoading ? (
-    <span>En cours de chargement..</span>
+    <Loader />
   ) : (
     <main className="comicsItem">
       <h3>
@@ -34,6 +36,9 @@ const ComicsByCharacters = () => {
         </span>
       </h3>
       <ul>
+        {data.comics.length === 0 && (
+          <span>This characters didnt get comics</span>
+        )}
         {data.comics.map((elem, index) => {
           return (
             <li

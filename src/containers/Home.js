@@ -1,19 +1,14 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import CharactersItem from "../components/CharactersItem";
+import Loader from "../components/Loader";
 
 const Home = ({ value, userToken, pagination, setPagination }) => {
   const [count, setCount] = useState();
   const [data, setData] = useState();
   const [userData, setUserData] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    const formData = window.localStorage.getItem("characters");
-    setPagination(JSON.parse(formData));
-  }, [setPagination]);
-  useEffect(() => {
-    window.localStorage.setItem("characters", JSON.stringify(pagination));
-  });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,7 +29,6 @@ const Home = ({ value, userToken, pagination, setPagination }) => {
           );
           setUserData(response2.data);
         }
-
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -44,15 +38,7 @@ const Home = ({ value, userToken, pagination, setPagination }) => {
   }, [pagination.skip, pagination.limit, value, userToken]);
 
   return isLoading ? (
-    <div class="wrapper">
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="shadow"></div>
-      <div class="shadow"></div>
-      <div class="shadow"></div>
-      <span>Loading</span>
-    </div>
+    <Loader />
   ) : (
     <main>
       <h3>List of MARVEL's characters</h3>

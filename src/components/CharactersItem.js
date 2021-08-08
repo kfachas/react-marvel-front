@@ -4,13 +4,8 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as heartRegular } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as heartSolid } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
 
 const CharactersItem = ({ data, userData, userToken }) => {
-  const [test, setTest] = useState(false);
-  const handleTest = () => {
-    setTest(!test);
-  };
   return (
     <>
       {data.map((elem) => {
@@ -18,7 +13,6 @@ const CharactersItem = ({ data, userData, userToken }) => {
         if (userToken) {
           for (let i = 0; i < userData.charactersFav.length; i++) {
             if (elem._id === userData.charactersFav[i]._id) {
-              console.log(userData.charactersFav[i].title);
               flag = 1;
             }
           }
@@ -55,8 +49,8 @@ const CharactersItem = ({ data, userData, userToken }) => {
                           },
                         }
                       );
-                      console.log(response);
                       window.location.reload();
+                      console.log(response);
                     } catch (error) {
                       if (!userToken) {
                         alert(
@@ -99,8 +93,6 @@ const CharactersItem = ({ data, userData, userToken }) => {
             <Link to={`/comics/${elem._id}`}>
               <div
                 className="imgCha"
-                onMouseEnter={handleTest}
-                onMouseLeave={handleTest}
                 style={{
                   background: `url(${elem.thumbnail.path}.${elem.thumbnail.extension})`,
                   backgroundSize: "cover",

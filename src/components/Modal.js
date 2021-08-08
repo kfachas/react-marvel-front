@@ -44,9 +44,7 @@ const Modal = ({ modal, setModal, setUser, clickLogin }) => {
           }
         );
         console.log(response);
-        alert(
-          "Votre inscription à été validée ! Vous pouvez dès maintenant vous connectez"
-        );
+        alert("Registration completed! You can now log in!");
         history.push("/favorites");
       } else {
         setVerify(false);
@@ -103,7 +101,7 @@ const Modal = ({ modal, setModal, setUser, clickLogin }) => {
         <input
           type="password"
           name="password"
-          minlength="6"
+          minLength="6"
           placeholder="password"
           onKeyDown={handleKeyDown}
           onChange={(event) => {
@@ -146,7 +144,7 @@ const Modal = ({ modal, setModal, setUser, clickLogin }) => {
           type="text"
           name="name"
           placeholder="Username"
-          minlength="5"
+          minLength="5"
           onChange={(event) => {
             const obj = { ...values };
             const value = event.target.value;
@@ -170,7 +168,7 @@ const Modal = ({ modal, setModal, setUser, clickLogin }) => {
           type="password"
           name="password"
           placeholder="Password"
-          minlength="6"
+          minLength="6"
           onKeyDown={handleKeyDown}
           style={{ border: verify === false ? "1px solid red" : "" }}
           onChange={(event) => {
@@ -185,7 +183,7 @@ const Modal = ({ modal, setModal, setUser, clickLogin }) => {
           type="password"
           name="password"
           placeholder="Confirm password"
-          minlength="6"
+          minLength="6"
           onKeyDown={handleKeyDown}
           style={{ border: verify === false ? "1px solid red" : "" }}
           onChange={(event) => {
